@@ -1,0 +1,13 @@
+DROP DATABASE IF EXISTS student_table;
+CREATE DATABASE IF NOT EXISTS student_table;
+USE student_table;
+CREATE TABLE `teacher` (
+id INT NOT NULL PRIMARY KEY,
+`name` VARCHAR(45) NULL,
+age INT NULL,
+country VARCHAR(45)
+);
+CREATE TABLE `class` (
+id INT NOT NULL PRIMARY KEY,
+`name` VARCHAR(45) NULL
+);
