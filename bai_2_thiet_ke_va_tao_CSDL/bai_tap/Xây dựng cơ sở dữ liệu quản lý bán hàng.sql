@@ -4,7 +4,7 @@ USE quan_ly_ban_hang;
 
 CREATE TABLE customer (
     customer_id INT NOT NULL PRIMARY KEY,
-    customer_name VARCHAR(25),
+    customer_name VARCHAR(255),
     customer_age INT NOT NULL
 );
 CREATE TABLE `order` (
@@ -17,13 +17,13 @@ CREATE TABLE `order` (
 
 CREATE TABLE product (
     product_id INT NOT NULL PRIMARY KEY,
-    product_name VARCHAR(25),
+    product_name VARCHAR(255),
     product_price INT NOT NULL
 );
 CREATE TABLE order_deitail (
     order_id INT NOT NULL,
     product_id INT NOT NULL,
-    order_quantity VARCHAR(25),
+    order_quantity VARCHAR(255),
     PRIMARY KEY (order_id , product_id),
     FOREIGN KEY (order_id) REFERENCES `order` (order_id),
     FOREIGN KEY (product_id) REFERENCES product (product_id)
