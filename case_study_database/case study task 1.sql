@@ -28,9 +28,9 @@ CREATE TABLE nhan_vien(
     email VARCHAR(45),
     dia_chi VARCHAR(45),
     
-    FOREIGN KEY (id_vi_tri) REFERENCES vi_tri(id_vi_tri),
-    FOREIGN KEY (id_trinh_do) REFERENCES trinh_do(id_trinh_do),
-    FOREIGN KEY (id_bo_phan) REFERENCES bo_phan(id_bo_phan)
+    FOREIGN KEY (id_vi_tri) REFERENCES vi_tri(id_vi_tri) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (id_trinh_do) REFERENCES trinh_do(id_trinh_do) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (id_bo_phan) REFERENCES bo_phan(id_bo_phan) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE loai_khach(
@@ -67,7 +67,7 @@ CREATE TABLE khach_hang(
     email VARCHAR(45),
     dia_chi VARCHAR(45),
     
-    FOREIGN KEY (id_loai_khach) REFERENCES loai_khach(id_loai_khach)
+    FOREIGN KEY (id_loai_khach) REFERENCES loai_khach(id_loai_khach) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE dich_vu(
@@ -81,8 +81,8 @@ CREATE TABLE dich_vu(
     id_loai_dich_vu INT,
     trang_thai VARCHAR(45),
     
-    FOREIGN KEY (id_kieu_thue) REFERENCES kieu_thue(id_kieu_thue),
-    FOREIGN KEY (id_loai_dich_vu) REFERENCES loai_dich_vu(id_loai_dich_vu)
+    FOREIGN KEY (id_kieu_thue) REFERENCES kieu_thue(id_kieu_thue) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (id_loai_dich_vu) REFERENCES loai_dich_vu(id_loai_dich_vu) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE hop_dong(
@@ -95,9 +95,9 @@ CREATE TABLE hop_dong(
     tien_dat_coc INT,
     tong_tien INT,
     
-    FOREIGN KEY (id_nhan_vien) REFERENCES nhan_vien(id_nhan_vien),
-    FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id_khach_hang),
-    FOREIGN KEY (id_dich_vu) REFERENCES dich_vu(id_dich_vu)
+    FOREIGN KEY (id_nhan_vien) REFERENCES nhan_vien(id_nhan_vien) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id_khach_hang) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (id_dich_vu) REFERENCES dich_vu(id_dich_vu) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE hop_dong_chi_tiet(
@@ -106,10 +106,11 @@ CREATE TABLE hop_dong_chi_tiet(
     id_dich_vu_di_kem INT,
     so_luong INT,
     
-    FOREIGN KEY (id_hop_dong) REFERENCES hop_dong(id_hop_dong),
-    FOREIGN KEY (id_dich_vu_di_kem) REFERENCES dich_vu_di_kem(id_dich_vu_di_kem)
+    FOREIGN KEY (id_hop_dong) REFERENCES hop_dong(id_hop_dong) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (id_dich_vu_di_kem) REFERENCES dich_vu_di_kem(id_dich_vu_di_kem) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+SET FOREIGN_KEY_CHECKS=0;
 INSERT INTO trinh_do(trinh_do)
 VALUES ('Trung Cấp'),
 		('Cao Đẳng'),
@@ -153,7 +154,8 @@ VALUES ('Nguyễn Quang Nhật', 4, 3, 4, '1998-05-12', '1234567890', '10000000'
 		('Dương Quốc Huy', 3, 3, 3, '1997-04-18','0123456098', '10000000', '0835123123', 'quochuy@gmail.com', 'Hội An'),
         ('Trần Ngọc Tân', 4, 4, 4, '1991-09-23', '200123456', '14000000', '0392434343', 'ngoctan@gmail.com', 'Hà Nội'),
         ('Phạm Anh Thư', 2, 3, 1, '2003-08-16','201777888', '5000000', '0325592612', 'anhthu@gmail.com', 'Hồ Chí Minh'),
-        ('Hoàng Văn Khoa', 1, 2, 1, '1992-02-10', '123456777', '4000000', '0816777777', 'vankhoa@gmail.com', 'Hải Dương');
+        ('Hoàng Văn Khoa', 1, 2, 1, '1992-02-10', '123456777', '4000000', '0816777777', 'vankhoa@gmail.com', 'Hải Dương'),
+        ('Nguyễn Văn X', 2, 3, 1, '1990-02-02', '201777888', '4000000', '0835123123', 'X@gmail.com', 'Hà Nội');
 INSERT INTO khach_hang(id_loai_khach, ho_ten, ngay_sinh, so_cmtnd, sdt, email, dia_chi)
 VALUES (5, 'Nguyễn Văn A', '1996-09-09', '202000001', '0123000009', 'VanA@gmail.com', 'Đà Nẵng'),
 	(1, 'Nguyễn Văn B', '1993-10-20', '202000002', '0123000010', 'VanB@gmail.com', 'Quảng Trị'),
@@ -165,28 +167,35 @@ VALUES (5, 'Nguyễn Văn A', '1996-09-09', '202000001', '0123000009', 'VanA@gma
     (1, 'Nguyễn Văn H', '1987-12-25', '202006789', '0123009999', 'VanH@gmail.com', 'Đà Nẵng'),
     (1, 'Nguyễn Văn I', '1984-11-24', '202003456', '0123001233', 'VanJ@gmail.com', 'Quảng Ngãi'),
     (1, 'Nguyễn Văn J', '1983-11-24', '202003456', '0123001233', 'VanJ@gmail.com', 'Vinh'),
-    (1, 'Nguyễn Văn K', '1982-11-24', '202003456', '0123001233', 'VanJ@gmail.com', 'Quảng Ngãi');
+    (1, 'Nguyễn Văn K', '1982-11-24', '202003456', '0123001233', 'VanJ@gmail.com', 'Quảng Ngãi'),
+     (2, 'Nguyễn Văn L', '1983-11-24', '202003456', '0123001233', 'VanJ@gmail.com', 'Quảng Lợi');
+
 INSERT INTO dich_vu(ten_dich_vu, dien_tich, so_tang, so_nguoi_toi_da, chi_phi_thue, id_kieu_thue, id_loai_dich_vu, trang_thai)
 VALUES ('VILLA_1', 100, 3, 10, 10000000, 3, 1, 'còn chỗ'),
 		('VILLA_2', 150, 4, 12, 14000000, 3, 1, 'còn chỗ'),
 		('VILLA_3', 200, 3, 15, 30000000, 2, 1, 'còn chỗ'),
 		('ROOM_1', 40, 1, 2, 1200000, 4, 3, 'còn chỗ'),
-		('ROOM_2', 50, 1, 3, 1500000, 3, 3, 'còn chỗ'),
+		('ROOM_2', 50, 1, 3, 15000000, 3, 3, 'còn chỗ'),
 		('HOUSE_1', 180, 2, 5, 8000000, 1, 2, 'còn chỗ'),
 		('HOUSE_2', 200, 4, 10, 10000000, 1, 2, 'còn chỗ');
 INSERT INTO hop_dong(id_nhan_vien, id_khach_hang, id_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, tong_tien)
 VALUES (1,1,1,'2019-10-09', '2019-10-10', 5000000, 30000000),
-		(2,2,4,'2019-01-01', '2019-01-03', 400000, 3600000),
+		(1,2,4,'2019-01-01', '2019-01-03', 400000, 3600000),
         (3,1,1,'2019-03-09', '2019-03-12', 3000000, 30000000),
-        (2,5,5,'2019-01-09', '2019-01-10', 300000, 1500000),
+        (2,5,5,'2019-01-09', '2019-01-10', 300000, 15000000),
         (3,6,5,'2019-01-21', '2019-01-23', 400000, 2600000),
         (4,7,5,'2019-12-18', '2019-12-20', 200000, 2600000),
         (5,9,7,'2019-11-15', '2019-11-16', 10000000, 10000000),
         (1,3,6,'2019-08-12', '2019-08-16', 500000, 40000000),
         (1,10,2,'2018-07-08', '2018-07-10', 5000000,20000000),
-        (2,11,3,'2019-07-08', '2019-07-10', 5000000,20000000);
+        (2,11,3,'2019-07-08', '2019-07-10', 5000000,20000000),
+        (6,11,3,'2016-07-08', '2016-07-10', 5000000,20000000),
+        (1,2,4,'2019-02-12', '2019-02-14', 400000, 3600000),
+        (1,2,4,'2019-06-07', '2019-06-08', 400000, 3600000),
+        (1,12,7,'2019-12-07', '2019-12-08', 400000, 3600000);
 INSERT INTO hop_dong_chi_tiet(id_hop_dong, id_dich_vu_di_kem, so_luong)
-VALUES (1,1,2),(1,2,1),(1,4,2),(2,4,1),(3,1,5),(4,5,2),(5,2,1),(6,5,2),(7,1,4),(8,4,8),(9,1,3),(10,2,1);
+VALUES (1,1,2),(1,2,1),(1,4,2),(2,4,1),(3,3,5),(4,5,2),(5,2,1),(6,5,2),(7,1,4),(8,4,8),(9,1,3),(10,2,1),(11,2,2),(12,3,1), (13,2,1);
+SET FOREIGN_KEY_CHECKS=1;
         
 /* 
 TASK 2: Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 ký tự.
@@ -320,8 +329,9 @@ FROM dich_vu_di_kem dvdk JOIN hop_dong_chi_tiet hdct ON dvdk.id_dich_vu_di_kem =
                         JOIN khach_hang kh ON hd.id_khach_hang = kh.id_khach_hang
                         JOIN dich_vu dv ON hd.id_dich_vu = dv.id_dich_vu
                         JOIN nhan_vien nv ON nv.id_nhan_vien = hd.id_nhan_vien
-WHERE (year(hd.ngay_lam_hop_dong)=2019 AND quarter(hd.ngay_lam_hop_dong)=4)
-AND NOT ((year(hd.ngay_lam_hop_dong)) = 2019 AND (quarter(hd.ngay_lam_hop_dong) = 1 OR quarter(hd.ngay_lam_hop_dong) = 2))
+WHERE (year(hd.ngay_lam_hop_dong)=2019) AND (quarter(hd.ngay_lam_hop_dong)=4 ) 
+AND dv.id_dich_vu NOT IN (SELECT dv.id_dich_vu FROM dich_vu dv JOIN hop_dong hd ON dv.id_dich_vu = hd.id_dich_vu 
+						WHERE (year(hd.ngay_lam_hop_dong)) = 2019 AND (quarter(hd.ngay_lam_hop_dong) = 1 OR quarter(hd.ngay_lam_hop_dong) = 2))
 GROUP BY hdct.id_hop_dong;
 
 /*
@@ -332,8 +342,71 @@ TASK 13: Hiển thị thông tin các Dịch vụ đi kèm được sử dụng 
 SELECT COUNT(hdct.id_dich_vu_di_kem) as 'Số lần sử dụng', dvdk.id_dich_vu_di_kem, dvdk.ten_dich_vu_di_kem, dvdk.gia, dvdk.don_vi, dvdk.trang_thai_kha_dung
 FROM dich_vu_di_kem dvdk JOIN hop_dong_chi_tiet hdct ON dvdk.id_dich_vu_di_kem = hdct.id_dich_vu_di_kem
 GROUP BY hdct.id_dich_vu_di_kem
-HAVING COUNT(hdct.id_dich_vu_di_kem) 
+HAVING COUNT(hdct.id_dich_vu_di_kem);
 
+/*
+TASK 14: Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem, SoLanSuDung.
+*/
+SELECT COUNT(hdct.id_dich_vu_di_kem), dvdk.ten_dich_vu_di_kem, dvdk.gia, dvdk.don_vi, dvdk.trang_thai_kha_dung
+FROM loai_dich_vu ldv JOIN dich_vu dv ON ldv.id_loai_dich_vu = dv.id_loai_dich_vu
+						JOIN hop_dong hd ON hd.id_dich_vu = dv.id_dich_vu
+                        JOIN hop_dong_chi_tiet hdct ON hdct.id_hop_dong = hd.id_hop_dong
+                        JOIN dich_vu_di_kem dvdk ON dvdk.id_dich_vu_di_kem = hdct.id_dich_vu_di_kem
+GROUP BY hdct.id_dich_vu_di_kem
+HAVING COUNT(hdct.id_dich_vu_di_kem) = 1;
 
+/*
+TASK 15: Hiển thi thông tin của tất cả nhân viên bao gồm IDNhanVien, HoTen, TrinhDo, TenBoPhan, SoDienThoai, DiaChi mới chỉ lập được tối đa 3 hợp đồng từ năm 2018 đến 2019.
+*/
 
+SELECT nv.id_nhan_vien, nv.ho_ten, td.trinh_do, bp.ten_bo_phan, nv.sdt, nv.dia_chi
+FROM bo_phan bp JOIN nhan_vien nv ON bp.id_bo_phan = nv.id_bo_phan
+				JOIN trinh_do td ON td.id_trinh_do = nv.id_trinh_do
+                JOIN hop_dong hd ON hd.id_nhan_vien = nv.id_nhan_vien
+WHERE YEAR(hd.ngay_lam_hop_dong) BETWEEN '2018' AND '2019'
+GROUP BY nv.id_nhan_vien
+HAVING (COUNT(nv.id_nhan_vien) <= 3) 
+ORDER BY nv.id_nhan_vien;
 
+/*
+TASK 16: H16.Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2017 đến năm 2019.
+*/
+
+-- DELETE FROM nhan_vien nv
+-- WHERE id_nhan_vien NOT IN (SELECT id_nhan_vien FROM hop_dong WHERE COUNT(id_nhan_vien) = 0 )
+SET SQL_SAFE_UPDATES=0;
+DELETE FROM nhan_vien 
+WHERE id_nhan_vien IN (
+	SELECT id_nhan_vien FROM (SELECT * FROM nhan_vien) AS A 
+    WHERE id_nhan_vien NOT IN (  SELECT * FROM (SELECT nv.id_nhan_vien FROM nhan_vien nv 
+								JOIN hop_dong hd ON nv.id_nhan_vien = hd.id_nhan_vien 
+								WHERE YEAR(hd.ngay_lam_hop_dong) BETWEEN 2017 AND 2019 
+                                GROUP BY nv.id_nhan_vien) AS B));
+SET SQL_SAFE_UPDATES= 1;                              
+SELECT * FROM nhan_vien;
+/*
+TASK 17: Cập nhật thông tin những khách hàng có TenLoaiKhachHang từ  Platinium lên Diamond, chỉ cập nhật những khách hàng đã từng đặt phòng với tổng Tiền thanh toán trong năm 2019 là lớn hơn 10.000.000 VNĐ.
+*/
+SET SQL_SAFE_UPDATES=0;
+UPDATE khach_hang  
+SET id_loai_khach = 1 
+-- WHERE id_loai_khach IN ( AND ((dvdk.gia+hdct.so_luong+dv.chi_phi_thue) > 10000000 AND YEAR(hd.ngay_lam_hop_dong) = 2019);
+WHERE id_khach_hang IN (SELECT A.id_khach_hang FROM ( SELECT kh.id_khach_hang FROM khach_hang kh JOIN hop_dong hd ON kh.id_khach_hang = hd.id_khach_hang
+					JOIN hop_dong_chi_tiet hdct ON hdct.id_hop_dong = hd.id_hop_dong
+                    JOIN dich_vu_di_kem dvdk ON dvdk.id_dich_vu_di_kem = hdct.id_dich_vu_di_kem
+                    JOIN dich_vu dv ON dv.id_dich_vu = hd.id_dich_vu
+                    JOIN loai_khach lk ON lk.id_loai_khach = kh.id_loai_khach 
+                    WHERE lk.id_loai_khach = 2 AND 
+                    ((dvdk.gia+hdct.so_luong+dv.chi_phi_thue) > 10000000 AND YEAR(hd.ngay_lam_hop_dong) = 2019)) AS A);
+SET SQL_SAFE_UPDATES= 1;
+SELECT * FROM khach_hang;
+
+/*
+TASK 18: Xóa những khách hàng có hợp đồng trước năm 2016 (chú ý ràng buộc giữa các bảng).
+*/
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM khach_hang 
+WHERE id_khach_hang IN (SELECT id_khach_hang FROM( SELECT kh.id_khach_hang FROM khach_hang kh JOIN hop_dong hd ON kh.id_khach_hang = hd.id_khach_hang
+						WHERE YEAR(hd.ngay_lam_hop_dong) < 2016) AS A);
+SET SQL_SAFE_UPDATES = 1;    
+            
