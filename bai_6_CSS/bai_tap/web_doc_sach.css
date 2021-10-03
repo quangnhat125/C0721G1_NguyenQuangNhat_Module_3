@@ -1,0 +1,27 @@
+h1 {
+  background-color: red;
+  text-align: center;
+}
+img {
+  align-items: center;
+}
+#index {
+  color: aqua;
+  display: inline-block;
+  text-align: right;
+}
+h5 {
+  text-align: center;
+}
+#chuong_1 {
+  text-align: center;
+}
+#chuong_2 {
+  text-align: center;
+}
+#chuong_3 {
+  text-align: center;
+}
+#chuong_4 {
+  text-align: center;
+}
