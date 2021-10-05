@@ -2,9 +2,7 @@ h1 {
   background-color: red;
   text-align: center;
 }
-img {
-  align-items: center;
-}
+
 #index {
   color: aqua;
   display: inline-block;
