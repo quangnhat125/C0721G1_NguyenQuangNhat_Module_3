@@ -9,9 +9,17 @@ import java.io.IOException;
 public class DiscountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pDescription = request.getParameter("productDes");
-        double listPrice = Double.parseDouble(request.getParameter("listPrice"));
-        double discountPrice = Double.parseDouble(request.getParameter("discount"));
-        double discount
+        String listPrice = request.getParameter("listPrice");
+        String discountPercent = request.getParameter("discountPercent");
+//        Double discountAmount = listPrice * discountPercent * 0.01;
+//        Double discountPrice = listPrice - discountAmount;
+//        request.setAttribute("description", pDescription);
+//        request.setAttribute("listPrice", listPrice);
+//        request.setAttribute("discountPercent", discountPercent);
+//        request.setAttribute("discountAmount", discountAmount);
+//        request.setAttribute("discountPrice", discountPrice);
+//
+//        request.getRequestDispatcher("discount.jsp").forward(request,response);
 
     }
 

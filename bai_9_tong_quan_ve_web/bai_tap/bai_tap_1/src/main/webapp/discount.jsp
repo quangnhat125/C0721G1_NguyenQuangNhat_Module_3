@@ -11,6 +11,8 @@
     <title>PRODUCT DISCOUNT CALCULATOR</title>
 </head>
 <body>
-
+<h1>CALCULATOR DISCOUNT</h1>
+<h2>Discount Amount: ${discountAmount}</h2>
+<h2>Discount Price: ${discountPrice}</h2>
 </body>
 </html>
