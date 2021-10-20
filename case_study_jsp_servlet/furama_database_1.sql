@@ -1,0 +1,1 @@
+SELECT * FROM furama_case_study.rent_type;
